@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lena Voss — Portfolio</title>
+  <meta name="description" content="I design operational software, quiet brands, and the small interfaces that hold a practice together. Twelve years of shipping with teams who care how something feels at seven in the morning." />
+  <meta name="theme-color" content="#f3eee6" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --paper:#f3eee6; --deep:#e6dfd2; --ink:#1a1714; --muted:#5c564e; --line:#d3c9bb; --oxide:#b8432f; --foam:#fffaf4; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:Outfit,ui-sans-serif,system-ui,sans-serif; font-weight:400; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    img { max-width:100%; display:block; }
+    a { color:inherit; }
+    button, summary { cursor:pointer; }
+    :focus-visible { outline:2px solid var(--oxide); outline-offset:3px; }
+    .wrap { width:min(1120px, calc(100% - 2.5rem)); margin-inline:auto; }
+    header { position:sticky; top:0; z-index:5; display:flex; justify-content:space-between; gap:1rem; align-items:center; padding:0.9rem 0; background:color-mix(in srgb, var(--paper) 92%, transparent); border-bottom:1px solid var(--line); backdrop-filter:blur(10px); }
+    header .wrap, .navwrap { display:flex; width:100%; align-items:center; justify-content:space-between; gap:1rem; }
+    .brand { font-family:Fraunces,Georgia,serif; font-size:1.35rem; text-decoration:none; }
+    nav { display:flex; flex-wrap:wrap; gap:0.4rem 1rem; }
+    nav a { text-decoration:none; font-size:0.95rem; min-height:44px; display:inline-flex; align-items:center; }
+    .hero { display:grid; gap:2rem; padding:3.5rem 0 2rem; }
+    h1, h2, h3, .display { font-family:Fraunces,Georgia,serif; font-weight:560; letter-spacing:-0.03em; line-height:0.92; text-wrap:balance; }
+    h1 { font-size:clamp(4rem, 12vw, 7.5rem); margin:0.4rem 0 0; }
+    h1 em { font-style:italic; font-weight:500; }
+    .role { font-family:Fraunces,Georgia,serif; font-size:clamp(1.8rem, 3vw, 2.6rem); line-height:1.05; max-width:16ch; margin:1.2rem 0 0; }
+    .kicker { font-size:0.75rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+    .lede { font-size:1.15rem; max-width:38rem; }
+    .actions { display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1.5rem; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0.55rem 1.1rem; border:1px solid var(--ink); background:transparent; color:var(--ink); text-decoration:none; font:inherit; }
+    .btn.fill { background:var(--oxide); border-color:var(--oxide); color:var(--foam); }
+    .avail { color:var(--muted); }
+    .filters { display:flex; flex-wrap:wrap; gap:0.5rem; margin:1.25rem 0; }
+    .chip { min-height:44px; padding:0.4rem 0.9rem; border:1px solid var(--line); background:transparent; color:var(--ink); font:inherit; }
+    .chip.on { background:var(--ink); color:var(--paper); border-color:var(--ink); }
+    .case { border-top:1px solid var(--line); }
+    .case:last-child { border-bottom:1px solid var(--line); }
+    .case[hidden] { display:none; }
+    summary { list-style:none; display:grid; grid-template-columns:auto 1fr auto auto 7rem; gap:1rem; align-items:center; padding:1.1rem 0; }
+    summary::-webkit-details-marker { display:none; }
+    summary .num { color:var(--muted); font-variant-numeric:tabular-nums; }
+    summary strong { font-family:Fraunces,Georgia,serif; font-size:clamp(1.7rem, 3vw, 2.4rem); font-weight:560; letter-spacing:-0.03em; display:block; }
+    summary em { display:block; margin-top:0.35rem; color:var(--muted); font-style:normal; }
+    .thumb { width:7rem; height:4.6rem; object-fit:cover; }
+    .study { padding:0 0 2.5rem; }
+    .cover { width:100%; max-height:32rem; object-fit:cover; margin-bottom:1.25rem; }
+    .study h3 { font-size:clamp(2.4rem, 5vw, 4rem); margin:0.4rem 0; }
+    .facts { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1.5rem 0; }
+    .facts dt { color:var(--muted); font-size:0.75rem; letter-spacing:0.14em; text-transform:uppercase; }
+    .facts dd { margin:0.25rem 0 0; }
+    .metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:1rem 0; margin-bottom:1.5rem; }
+    .metric b { font-family:Fraunces,Georgia,serif; font-size:2rem; font-weight:560; display:block; }
+    .metric span { color:var(--muted); }
+    .study h4 { font-family:Fraunces,Georgia,serif; font-size:1.4rem; margin-bottom:0.3rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:0.5rem; padding:0; list-style:none; }
+    .tags li { border:1px solid var(--line); padding:0.3rem 0.6rem; font-size:0.9rem; }
+    .split { display:grid; gap:2rem; padding:4rem 0; }
+    .portrait { width:100%; aspect-ratio:3/4; object-fit:cover; }
+    .principles, .jobs, .caps { list-style:none; padding:0; margin:1.5rem 0 0; }
+    .principles li, .jobs li { display:grid; grid-template-columns:6.5rem 1fr; gap:1rem; border-top:1px solid var(--line); padding:1rem 0; }
+    .principles p, .jobs p, .caps p { color:var(--muted); margin:0.3rem 0 0; }
+    #practice { background:var(--ink); color:var(--paper); }
+    #practice .kicker, #practice .jobs em, #practice .caps p { color:color-mix(in srgb, var(--paper) 70%, transparent); }
+    #practice .jobs li { border-color:color-mix(in srgb, var(--paper) 22%, transparent); }
+    .caps { display:grid; gap:1rem; }
+    .caps li { border-top:1px solid color-mix(in srgb, var(--paper) 22%, transparent); padding-top:0.8rem; }
+    .notes { display:grid; gap:1rem; }
+    .note { border-top:1px solid var(--line); }
+    .note summary { display:block; }
+    .note summary strong { margin-top:0.4rem; }
+    .note-body { padding-bottom:1.5rem; max-width:40rem; }
+    .quotes { display:grid; gap:1.5rem; }
+    blockquote { margin:0; border-top:1px solid var(--line); padding-top:1rem; }
+    blockquote p { font-family:Fraunces,Georgia,serif; font-style:italic; font-size:1.7rem; line-height:1.2; margin:0; }
+    blockquote footer { margin-top:0.8rem; color:var(--muted); }
+    form { display:grid; gap:0.75rem; max-width:36rem; }
+    label { display:grid; gap:0.3rem; }
+    input, textarea { font:inherit; color:var(--ink); background:transparent; border:0; border-bottom:1px solid var(--line); padding:0.7rem 0; border-radius:0; }
+    textarea { border:1px solid var(--line); padding:0.75rem; min-height:8rem; }
+    .status { color:var(--oxide); min-height:1.5rem; }
+    footer.site { border-top:1px solid var(--line); padding:1.5rem 0 3rem; color:var(--muted); display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; }
+    @media (min-width: 800px) {
+      .hero { grid-template-columns: 1.4fr 0.8fr; align-items:end; }
+      .split { grid-template-columns: 0.8fr 1.2fr; align-items:start; }
+      .caps { grid-template-columns: 1fr 1fr; }
+      .quotes { grid-template-columns: 1fr 1fr 1fr; }
+      .notes { grid-template-columns: 1fr 1fr 1fr; align-items:start; }
+    }
+    @media (max-width: 720px) {
+      summary { grid-template-columns: auto 1fr; }
+      summary .meta, summary .thumb { display:none; }
+      .facts, .metrics { grid-template-columns:1fr; }
+      nav { display:none; }
+      nav.open { display:flex; flex-direction:column; position:absolute; left:0; right:0; top:100%; background:var(--paper); border-bottom:1px solid var(--line); padding:0.5rem 1.25rem 1rem; }
+      .menu { display:inline-flex; }
+    }
+    .menu { display:none; min-height:44px; min-width:44px; border:1px solid var(--ink); background:transparent; font:inherit; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap navwrap">
+      <a class="brand" href="#top">Lena Voss</a>
+      <button class="menu" type="button" id="menu">Menu</button>
+      <nav id="nav">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#practice">Practice</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero wrap" id="top">
+      <div>
+        <p class="kicker">Independent practice · Copenhagen</p>
+        <h1>Lena<br /><em>Voss</em></h1>
+        <p class="role">Product designer &amp; design engineer</p>
+      </div>
+      <div>
+        <p class="lede">I design operational software, quiet brands, and the small interfaces that hold a practice together. Twelve years of shipping with teams who care how something feels at seven in the morning.</p>
+        <p class="avail">Booking conversations for autumn 2026</p>
+        <div class="actions">
+          <a class="btn fill" href="#work">Selected work</a>
+          <a class="btn" href="#contact">Write</a>
+        </div>
+      </div>
+    </section>
+    <section id="work" class="wrap" style="padding-bottom:3rem">
+      <p class="kicker">Selected work · 6</p>
+      <h2 class="display" style="font-size:clamp(2rem,4vw,3.2rem);margin:0.4rem 0 0">Case studies</h2>
+      <div class="filters" id="filters"><button type="button" class="chip on" data-filter="All">All</button><button type="button" class="chip" data-filter="Product">Product</button><button type="button" class="chip" data-filter="Learning">Learning</button><button type="button" class="chip" data-filter="Systems">Systems</button><button type="button" class="chip" data-filter="Identity">Identity</button></div>
+      <div id="cases"><article class="case" data-discipline="Product">
+        <details>
+          <summary>
+            <span class="num">01</span>
+            <span class="case-title">
+              <strong>Harbor</strong>
+              <em>A calmer operating board for berth assignment and shift handover.</em>
+            </span>
+            <span class="meta">Product</span>
+            <span class="meta year">2025</span>
+            <img src="folio/harbor.jpg" alt="" class="thumb" />
+          </summary>
+          <div class="study">
+            <img src="folio/harbor.jpg" alt="Harbor" class="cover" />
+            <p class="kicker">North Sea Dispatch · 2025</p>
+            <h3>Harbor</h3>
+            <p class="lede">A calmer operating board for berth assignment and shift handover.</p>
+            <dl class="facts">
+              <div><dt>Role</dt><dd>Lead product design</dd></div>
+              <div><dt>Timeline</dt><dd>11 months</dd></div>
+              <div><dt>Practice</dt><dd>Product</dd></div>
+            </dl>
+            <div class="metrics"><div class="metric"><b>41%</b><span>Fewer missed berths</span></div><div class="metric"><b>6 min</b><span>Shift handover</span></div><div class="metric"><b>4</b><span>Night shifts shadowed</span></div></div>
+            <section><h4>Problem</h4><p>Dispatchers ran three radios, a spreadsheet, and a wall of paper slips. Handover between shifts dropped berth assignments, especially after midnight when the tide window was short.</p></section>
+            <section><h4>Approach</h4><p>I sat four night shifts before opening Figma. The board became a single tide-aware timeline. Paper slips turned into durable cards with a drag language the crew already used on the wall. Radio traffic stayed; the screen stopped competing with it.</p></section>
+            <section><h4>Outcome</h4><p>Shift handover fell from 18 minutes to 6. Missed berths dropped 41% in the first season. The night crew asked to keep a paper backup, so the printout shipped as part of the product, not a workaround.</p></section>
+            <ul class="tags"><li>Operations</li><li>Field research</li><li>Timeline</li></ul>
+          </div>
+        </details>
+      </article><article class="case" data-discipline="Learning">
+        <details>
+          <summary>
+            <span class="num">02</span>
+            <span class="case-title">
+              <strong>Kindling</strong>
+              <em>A climate lesson teachers can run without a login wall.</em>
+            </span>
+            <span class="meta">Learning</span>
+            <span class="meta year">2024</span>
+            <img src="folio/kindling.jpg" alt="" class="thumb" />
+          </summary>
+          <div class="study">
+            <img src="folio/kindling.jpg" alt="Kindling" class="cover" />
+            <p class="kicker">City of Aarhus · 2024</p>
+            <h3>Kindling</h3>
+            <p class="lede">A climate lesson teachers can run without a login wall.</p>
+            <dl class="facts">
+              <div><dt>Role</dt><dd>Product design &amp; prototyping</dd></div>
+              <div><dt>Timeline</dt><dd>7 months</dd></div>
+              <div><dt>Practice</dt><dd>Learning</dd></div>
+            </dl>
+            <div class="metrics"><div class="metric"><b>140</b><span>Classrooms in term one</span></div><div class="metric"><b>0</b><span>Accounts required</span></div><div class="metric"><b>22 min</b><span>Average lesson</span></div></div>
+            <section><h4>Problem</h4><p>The city’s climate curriculum lived in a PDF and a forgotten platform. Teachers would not create accounts, and the children needed something they could touch between slides.</p></section>
+            <section><h4>Approach</h4><p>We designed a 22-minute lesson around wooden blocks and one shared screen. No student accounts. The teacher’s view is a paper-sized script with three prompts and a timer that does not scold.</p></section>
+            <section><h4>Outcome</h4><p>140 classrooms ran Kindling in the first term. Average lesson time landed at 22 minutes, which was the point. The city retired the login platform for this age group.</p></section>
+            <ul class="tags"><li>Civic</li><li>Education</li><li>Facilitation</li></ul>
+          </div>
+        </details>
+      </article><article class="case" data-discipline="Product">
+        <details>
+          <summary>
+            <span class="num">03</span>
+            <span class="case-title">
+              <strong>Stillroom</strong>
+              <em>A steep timer that refuses to become a wellness brand.</em>
+            </span>
+            <span class="meta">Product</span>
+            <span class="meta year">2024</span>
+            <img src="folio/stillroom.jpg" alt="" class="thumb" />
+          </summary>
+          <div class="study">
+            <img src="folio/stillroom.jpg" alt="Stillroom" class="cover" />
+            <p class="kicker">Independent · 2024</p>
+            <h3>Stillroom</h3>
+            <p class="lede">A steep timer that refuses to become a wellness brand.</p>
+            <dl class="facts">
+              <div><dt>Role</dt><dd>Design &amp; engineering</dd></div>
+              <div><dt>Timeline</dt><dd>4 months</dd></div>
+              <div><dt>Practice</dt><dd>Product</dd></div>
+            </dl>
+            <div class="metrics"><div class="metric"><b>1</b><span>Screen</span></div><div class="metric"><b>800</b><span>Quiet release</span></div><div class="metric"><b>3×</b><span>Weekly return to a note</span></div></div>
+            <section><h4>Problem</h4><p>Tea software wanted streaks, scores, and a shop. The people who actually keep a stillroom wanted one kiln, one steep, and a note they could find next week.</p></section>
+            <section><h4>Approach</h4><p>One screen. A ceramic-colored clock, a leaf, a line for the note. No feed, no account, no recommendations. I wrote it as a small local app so the note stays on the device.</p></section>
+            <section><h4>Outcome</h4><p>Released quietly to a list of 800. The only metric we kept was whether people returned to yesterday’s note. They did, about three times a week.</p></section>
+            <ul class="tags"><li>Ritual</li><li>Local-first</li><li>Restraint</li></ul>
+          </div>
+        </details>
+      </article><article class="case" data-discipline="Systems">
+        <details>
+          <summary>
+            <span class="num">04</span>
+            <span class="case-title">
+              <strong>Ledger &amp; Light</strong>
+              <em>Commerce for shops that still ring a bell when a book arrives.</em>
+            </span>
+            <span class="meta">Systems</span>
+            <span class="meta year">2023</span>
+            <img src="folio/ledger.jpg" alt="" class="thumb" />
+          </summary>
+          <div class="study">
+            <img src="folio/ledger.jpg" alt="Ledger &amp; Light" class="cover" />
+            <p class="kicker">Six independent bookshops · 2023</p>
+            <h3>Ledger &amp; Light</h3>
+            <p class="lede">Commerce for shops that still ring a bell when a book arrives.</p>
+            <dl class="facts">
+              <div><dt>Role</dt><dd>Design systems &amp; product</dd></div>
+              <div><dt>Timeline</dt><dd>9 months</dd></div>
+              <div><dt>Practice</dt><dd>Systems</dd></div>
+            </dl>
+            <div class="metrics"><div class="metric"><b>6</b><span>Shops on one catalog</span></div><div class="metric"><b>50%</b><span>Fewer lost special orders</span></div><div class="metric"><b>1</b><span>Card still under the till</span></div></div>
+            <section><h4>Problem</h4><p>Six shops shared a wholesaler and nothing else. Online orders were a shared inbox. Special orders lived on cards under the till, and those cards were the soul of the place.</p></section>
+            <section><h4>Approach</h4><p>We kept the card. The system photographs it, files the customer, and prints a shelf slip in the shop’s own type. A shared catalog sits behind the counter, never on a customer-facing kiosk.</p></section>
+            <section><h4>Outcome</h4><p>Special-order losses dropped by half. Staff stopped retyping the inbox. Each shop kept its bell, its handwriting, and its own front-of-house voice.</p></section>
+            <ul class="tags"><li>Retail</li><li>Systems</li><li>Print</li></ul>
+          </div>
+        </details>
+      </article><article class="case" data-discipline="Identity">
+        <details>
+          <summary>
+            <span class="num">05</span>
+            <span class="case-title">
+              <strong>Night Market</strong>
+              <em>Wayfinding for a market that only exists after dark.</em>
+            </span>
+            <span class="meta">Identity</span>
+            <span class="meta year">2023</span>
+            <img src="folio/night.jpg" alt="" class="thumb" />
+          </summary>
+          <div class="study">
+            <img src="folio/night.jpg" alt="Night Market" class="cover" />
+            <p class="kicker">Cultural foundation · 2023</p>
+            <h3>Night Market</h3>
+            <p class="lede">Wayfinding for a market that only exists after dark.</p>
+            <dl class="facts">
+              <div><dt>Role</dt><dd>Identity &amp; environmental graphics</dd></div>
+              <div><dt>Timeline</dt><dd>5 months</dd></div>
+              <div><dt>Practice</dt><dd>Identity</dd></div>
+            </dl>
+            <div class="metrics"><div class="metric"><b>4</b><span>Gates, not a maze key</span></div><div class="metric"><b>1 word</b><span>Per lantern</span></div><div class="metric"><b>2</b><span>Seasons on the same mark</span></div></div>
+            <section><h4>Problem</h4><p>Maps failed because the market moves. Stalls change lanes with the weather. Visitors arrived with a daytime map and got lost in a place that had already rearranged itself.</p></section>
+            <section><h4>Approach</h4><p>Lanterns became the sign system: color for the lane, a single word for the trade, hung low enough to read in rain. The printed map became a small card that only names the gates.</p></section>
+            <section><h4>Outcome</h4><p>Stewards reported fewer lost visitors on opening weekend, and the lanterns were reused the next season without a redesign. The identity is the light, not a logo wall.</p></section>
+            <ul class="tags"><li>Identity</li><li>Wayfinding</li><li>Place</li></ul>
+          </div>
+        </details>
+      </article><article class="case" data-discipline="Product">
+        <details>
+          <summary>
+            <span class="num">06</span>
+            <span class="case-title">
+              <strong>Glasshouse</strong>
+              <em>A climate notebook for greenhouses, not a factory dashboard.</em>
+            </span>
+            <span class="meta">Product</span>
+            <span class="meta year">2022</span>
+            <img src="folio/glasshouse.jpg" alt="" class="thumb" />
+          </summary>
+          <div class="study">
+            <img src="folio/glasshouse.jpg" alt="Glasshouse" class="cover" />
+            <p class="kicker">Urban growers’ cooperative · 2022</p>
+            <h3>Glasshouse</h3>
+            <p class="lede">A climate notebook for greenhouses, not a factory dashboard.</p>
+            <dl class="facts">
+              <div><dt>Role</dt><dd>Product design</dd></div>
+              <div><dt>Timeline</dt><dd>8 months</dd></div>
+              <div><dt>Practice</dt><dd>Product</dd></div>
+            </dl>
+            <div class="metrics"><div class="metric"><b>12</b><span>Houses logging daily</span></div><div class="metric"><b>1</b><span>Margin note, not an alarm wall</span></div><div class="metric"><b>Daily</b><span>Paper beside the trace</span></div></div>
+            <section><h4>Problem</h4><p>The cooperative inherited an industrial SCADA screen. Growers ignored the alarms and kept paper logs, because the screen could not say “the ferns looked tired.”</p></section>
+            <section><h4>Approach</h4><p>We recast the dashboard as a bench notebook: morning reading, a dial, a line for the eye’s judgment. Alarms became a single margin note. Sensors stayed; the voice changed.</p></section>
+            <section><h4>Outcome</h4><p>Log completion went from sporadic to daily across twelve houses. The cooperative kept the paper page and files a photo of it beside the sensor trace.</p></section>
+            <ul class="tags"><li>Climate</li><li>Instruments</li><li>Cooperative</li></ul>
+          </div>
+        </details>
+      </article></div>
+    </section>
+    <section id="about" class="split wrap">
+      <figure>
+        <img src="folio/portrait.jpg" alt="Lena Voss" class="portrait" />
+        <figcaption class="kicker">Lena Voss · Copenhagen</figcaption>
+      </figure>
+      <div>
+        <p class="kicker">About</p>
+        <h2 style="font-size:clamp(2.2rem,4vw,3.4rem);margin:0.4rem 0 1rem">Tools people can trust with their hands.</h2>
+        <p>I started in print at Studio Mare, moved into product at Northwind, and now work independently with harbor masters, teachers, booksellers, and growers. The brief is usually the same: a tool that has to survive a real shift, not a demo.</p><p>I stay close to the work. That means night shifts, shop floors, and classrooms before any screen. I also write the interface in code when a prototype needs to be the thing people argue with.</p>
+        <ol class="principles"><li><span>01</span><div><strong>Spend time where the work happens.</strong><p>A conference-room interview is a rumor. The night shift, the till, the greenhouse bench — that is the brief.</p></div></li><li><span>02</span><div><strong>Make the quiet path the default.</strong><p>Most people are tired when they meet the software. The obvious action should not require a tour.</p></div></li><li><span>03</span><div><strong>Leave something they can hold.</strong><p>A printout, a card, a paper slip. Digital tools earn trust when they meet the physical habit already in the room.</p></div></li></ol>
+      </div>
+    </section>
+    <section id="practice">
+      <div class="wrap split">
+        <div>
+          <p class="kicker">Practice</p>
+          <h2 style="font-size:clamp(2.2rem,4vw,3.4rem);margin-top:0.4rem">Where the work has been</h2>
+          <ol class="jobs"><li><span>2023 — now</span><div><strong>Atelier practice, Copenhagen</strong><em>Independent</em><p>Product design and interface engineering for civic teams, cooperatives, and small operational companies.</p></div></li><li><span>2020 — 2023</span><div><strong>Senior product designer</strong><em>Northwind</em><p>Led the design system and two shipped logistics products used across Nordic freight desks.</p></div></li><li><span>2017 — 2020</span><div><strong>Visual designer</strong><em>Studio Mare</em><p>Identity, print, and early digital work for museums, publishers, and seasonal markets.</p></div></li></ol>
+        </div>
+        <div>
+          <p class="kicker">Capabilities</p>
+          <ul class="caps"><li><strong>Field research</strong><p>Shift shadowing, shop-alongs, and interviews that change the brief.</p></li><li><strong>Interface design</strong><p>Dense tools, calm defaults, and type that stays readable at 6 a.m.</p></li><li><strong>Design systems</strong><p>Tokens, components, and the governance a small team will actually keep.</p></li><li><strong>Prototyping in code</strong><p>HTML, React, and the occasional hardware-adjacent interface.</p></li><li><strong>Identity for tools</strong><p>Names, marks, and voice that do not shout over the work.</p></li><li><strong>Workshops</strong><p>Critique and decision sessions with operators in the room, not just sponsors.</p></li></ul>
+        </div>
+      </div>
+    </section>
+    <section id="notes" class="wrap" style="padding:4rem 0">
+      <p class="kicker">Notes</p>
+      <h2 style="font-size:clamp(2.2rem,4vw,3.4rem);margin-top:0.4rem">From the studio</h2>
+      <div class="notes"><article class="note"><details>
+        <summary><span class="kicker">March 2026</span><strong>The night shift is the real stakeholder</strong><em>If the person who closes the building cannot use it, the product is a slide.</em></summary>
+        <div class="note-body"><p>On Harbor, the day team loved the first concept. The night team did not look at it. They were watching a tide window and three radios. We threw out the dashboard and sat two more shifts before drawing again.</p><p>The lesson was not “talk to users.” It was narrower: the stakeholder who is tired, interrupted, and accountable for a physical mistake outranks the stakeholder who presents the work.</p></div>
+      </details></article><article class="note"><details>
+        <summary><span class="kicker">November 2025</span><strong>Stop designing the empty state first</strong><em>Empty states are a designer&#39;s comfort. Full states are the product.</em></summary>
+        <div class="note-body"><p>Kindling’s first prototype was a beautiful blank classroom. Teachers never see a blank classroom. They see thirty names, a broken projector, and twelve minutes until the bell.</p><p>We started over from a full roster and a half-finished lesson. The empty state became a single line at the bottom, written last.</p></div>
+      </details></article><article class="note"><details>
+        <summary><span class="kicker">June 2025</span><strong>A printout is an interface</strong><em>If people keep a paper copy, design the paper. Do not call it a workaround.</em></summary>
+        <div class="note-body"><p>The harbor crew asked to keep their slips. Ledger &amp; Light still rings a bell and writes a card when a book arrives. Pretending those habits are legacy is how software gets ignored.</p><p>I now spec the print layout in the same file as the screen: type size, where the pencil lands, what survives a coffee ring.</p></div>
+      </details></article></div>
+      <div class="quotes" style="margin-top:2.5rem"><blockquote><p>“Lena sat the shift before she drew a single screen. The night crew still uses the board she left.”</p><footer>Anders Holm — Harbor master, Esbjerg</footer></blockquote><blockquote><p>“Teachers opened it the same afternoon. No accounts, no training deck. That never happens.”</p><footer>Maja Kruse — Learning lead, Aarhus schools</footer></blockquote><blockquote><p>“She designs like someone who has closed a shop. The till still feels like ours.”</p><footer>Hana Ito — Keeper, Ledger &amp; Light</footer></blockquote></div>
+    </section>
+    <section id="contact" class="wrap" style="padding-bottom:4rem">
+      <p class="kicker">Contact</p>
+      <h2 style="font-size:clamp(2.2rem,5vw,4rem);margin:0.4rem 0">Booking conversations for autumn 2026</h2>
+      <p><a href="mailto:hello@lenavoss.studio">hello@lenavoss.studio</a></p>
+      <form id="contact-form">
+        <label>Name<input name="name" required autocomplete="name" /></label>
+        <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+        <label>Note<textarea name="message" required></textarea></label>
+        <button class="btn fill" type="submit">Prepare email</button>
+        <p class="status" id="status" role="status"></p>
+      </form>
+    </section>
+  </main>
+  <footer class="site wrap">
+    <span>Lena Voss · Copenhagen</span>
+    <span>Set in Fraunces and Outfit</span>
+  </footer>
+  <script>
+    document.querySelectorAll("img").forEach((img) => {
+      const src = img.getAttribute("src") || "";
+      if (!src.endsWith(".jpg")) return;
+      fetch(src.slice(0, -4) + ".b64").then((res) => res.ok ? res.text() : "").then((text) => {
+        if (text) img.src = "data:image/jpeg;base64," + text.trim();
+      }).catch(() => {});
+    });
+    const menu = document.getElementById("menu");
+    const nav = document.getElementById("nav");
+    menu?.addEventListener("click", () => nav?.classList.toggle("open"));
+    nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () => nav.classList.remove("open")));
+    document.getElementById("filters")?.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const filter = button.dataset.filter;
+      document.querySelectorAll(".chip").forEach((chip) => chip.classList.toggle("on", chip === button));
+      document.querySelectorAll(".case").forEach((item) => {
+        item.hidden = filter !== "All" && item.dataset.discipline !== filter;
+      });
+    });
+    document.getElementById("contact-form")?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const message = String(data.get("message") || "").trim();
+      const status = document.getElementById("status");
+      if (!name || !email.includes("@") || message.length < 8) {
+        if (status) status.textContent = "Add a name, a real email, and a short note.";
+        return;
+      }
+      const subject = encodeURIComponent("Portfolio note from " + name);
+      const body = encodeURIComponent(name + " (" + email + ")\n\n" + message);
+      location.href = "mailto:hello@lenavoss.studio?subject=" + subject + "&body=" + body;
+      if (status) status.textContent = "Your mail app should open. If it does not, write to hello@lenavoss.studio.";
+    });
+  </script>
+</body>
+</html>
